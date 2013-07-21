@@ -1,12 +1,12 @@
 
 #container{
 	width:1000px;
-	margin:auto;
+	/*margin:auto;*/
 }
 
 #roomPane{
 	width:500px;
-	height:700px;
+	height:600px;
 	background:#eeeeee;
 	float:left;
 	border:1px solid #000000;
@@ -30,9 +30,12 @@
 	height:200px;
 	overflow-y: auto;
 }
-#messagePane{
+#messagePane,#priPane{
 	width: 300px;
 	height: 300px;
 	border: 1px solid #000000;
 	overflow-y: scroll;
+}
+#test{
+	clear: both;
 }

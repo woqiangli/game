@@ -2,7 +2,7 @@
 
 package com.game;
 
-import java.io.IOException;
+import java.io.IOException; 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
@@ -60,9 +60,27 @@ public class WsMessage extends MessageInbound {
 		case "05": removeRoom(messageString.substring(2));broadcast(usersList,messageString);break;
 		case "06": enterRoom(messageString.substring(2));broadcast(user.getRoom().getrUsersList(),"06"+user.getUserInfo().getuserId());break;
 		case "08": broadcast(user.getRoom().getrUsersList(),sign+user.getUserInfo().getuserId()+":"+messageString.substring(2));break;
+		case "09": case09(messageString.substring(2));break;
 		}
 	}
-	
+	//09私聊
+	private void case09(String message){
+		ArrayList<User> wsMessageList=new ArrayList<User>();
+		int  index =message.indexOf("-"); 
+		if(index!=-1){
+			String userName=message.substring(0, index);
+			String mes="09"+user.getUserInfo().getuserId()+"-"+userName+":"+message.substring(index+1);
+			for(User u:usersList){
+				if(u.getUserInfo().getuserId().equals(userName)){
+					wsMessageList.add(u);
+				}
+			}
+			if(!wsMessageList.isEmpty()){
+				wsMessageList.add(user);
+				broadcast(wsMessageList,mes);
+			}
+		}
+	}
 	/*向前端广播信息*/
 	private void broadcast(ArrayList<User> wsMessageList,String message){
 		System.out.println("broadcast:"+message);
