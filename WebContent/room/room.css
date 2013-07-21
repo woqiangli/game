@@ -1,0 +1,28 @@
+
+#container{
+	width:1000px;
+	margin:auto;
+}
+
+#chatPane{
+	height: 300px;
+	border: 1px solid rgb(0, 0, 0);
+	overflow-y: scroll;
+}
+
+#message{
+	width:400px;
+}
+
+#leftPane{
+	float:left;
+}
+
+#rightPane{
+	float:left;
+}
+
+#rUsersList{
+	height:200px;
+	overflow-y: auto;
+}

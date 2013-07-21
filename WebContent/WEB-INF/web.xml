@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <servlet>
+    <servlet-name>wsServlet</servlet-name>
+    <servlet-class>com.game.servlet.WsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>wsServlet</servlet-name>
+    <url-pattern>/wsServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>enterRoomServlet</servlet-name>
+    <servlet-class>com.game.servlet.EnterRoomServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>enterRoomServlet</servlet-name>
+    <url-pattern>/lobby/enterRoomServlet</url-pattern>
+	
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.game.servlet.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>filterstation</filter-name>
+    <filter-class>com.game.servlet.filter.UserInfoFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>filterstation</filter-name>
+    <url-pattern>/lobby/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>filterstation</filter-name>
+    <url-pattern>/room/*</url-pattern>
+  </filter-mapping>
+</web-app>

@@ -1,0 +1,38 @@
+
+#container{
+	width:1000px;
+	margin:auto;
+}
+
+#roomPane{
+	width:500px;
+	height:700px;
+	background:#eeeeee;
+	float:left;
+	border:1px solid #000000;
+}
+
+.room{
+	display: block;
+	float: left;
+	width: 100px;
+	height: 100px;
+	background: none repeat scroll 0% 0% rgb(255, 255, 255);
+	text-decoration: none;
+	margin: 10px;
+}
+
+#userPane{
+	float:left;
+}
+
+#usersList{
+	height:200px;
+	overflow-y: auto;
+}
+#messagePane{
+	width: 300px;
+	height: 300px;
+	border: 1px solid #000000;
+	overflow-y: scroll;
+}
