@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" import="com.game.MyList,java.util.ArrayList,com.game.models.*"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <!--
 	01:用户进入游戏大厅 ;  01+userId
 	02:用户离开大厅;  02+userId
@@ -12,7 +12,6 @@
 	08:房间广播;    发:08+message 广播:08+userId+:+message
 	09:私聊;       发:09+userId  广播:09+userId+:+message
 -->
-
 <%
 	request.setCharacterEncoding("UTF-8");
 	response.setCharacterEncoding("UTF-8");
@@ -28,6 +27,7 @@
 	<head>
 		<title>游戏大厅</title>
 		<link rel="stylesheet" type="text/css" href="../lobby/lobby.css">
+		
 		<script type="text/javascript" src="../lobby/lobby.js"></script>
 		<script>
 			var socket={};
@@ -64,9 +64,17 @@
 					case "05":deleteRoom(message);break;
 					case "09":addPriPanet(message);break;
 					}
+					
 				};
 			};
-
+			/*在大厅聊天面板中添加信息   */
+			function addText(message){
+				var messagePane=document.getElementById("messagePane");
+				var p=document.createElement("p");
+				p.innerHTML=message;
+				messagePane.appendChild(p);
+				messagePane.scrollTop=messagePane.scrollHeight;
+			}
 			/*向服务器发送数据  */
 			function sendMessage(type){
 				switch (type){
@@ -83,6 +91,7 @@
 					if(roomId!=""){
 						socket.send("04"+roomId);
 						window.location.href="enterRoomServlet?roomId="+roomId;
+						/* document.getElementById("roomId").value=""; */
 					}
 					break;
 				case "09":
@@ -93,14 +102,52 @@
 					break;
 				}
 			}
-			//初始化
-			window.onload = function() {
+			/*用户进入大厅，会广播进入信息  */
+			function enterLobby(userId){
+				var usersList=document.getElementById("usersList");
+				var user=document.createElement("li");
+				var a=document.createElement("a");
+				a.id="user"+userId;
+				a.className="user";
+				a.innerHTML=userId;
+				user.appendChild(a);
+				usersList.appendChild(user);
+			}
+			/*用户离开大厅  */
+			function leaveLobby(userId){
+				var user=document.getElementById("user"+userId);
+				user.parentNode.parentNode.removeChild(user.parentNode);
+			}
+			/*在大厅创建房间  */
+			function createRoom(roomId){
+				var a=document.createElement("a");
+				a.id=roomId;
+				a.className="room";
+				a.href="enterRoomServlet?roomId="+roomId;
+				var span=document.createElement("span");
+				span.className="roomId";
+				span.innerHTML=roomId;
+				a.appendChild(span);
+				document.getElementById("roomPane").appendChild(a);
+			}
+			/*在大厅删除房间  */
+			function deleteRoom(roomId){
+				var room=document.getElementById(roomId);
+				room.parentNode.removeChild(room);
+			}
+			/*进入房间时调用  */
+			function go(href){
+				window.setTimeout(function(){alert("你已经离开了游戏大厅！");}, 30);
+				window.location.href=href;
+			}
+	
+			window.onload=function(){
 				socket.connect();
-				checkCookie();
 			};
-			window.onbeforeunload = function() {
+			window.onbeforeunload=function(){
 				socket.close();
 			};
+
 		</script>
 	</head>
 	<body>
@@ -135,7 +182,6 @@
 				<button id="createRoom" onclick="sendMessage('04')">创建房间</button>
 			</div>
 		</div>
-
 		<!-- 私聊 -->
 		<div id ="test">
 			<div id="priPane"></div>

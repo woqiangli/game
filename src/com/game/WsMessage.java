@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import org.apache.catalina.websocket.MessageInbound;
 import org.apache.catalina.websocket.WsOutbound;
 
-import com.game.*;
-import com.game.models.*;
-import com.game.servlet.WsServlet;;
+import com.game.models.*;;
 
 public class WsMessage extends MessageInbound {
 	/*获取MyList类中的usersList,roomsList的引用*/
