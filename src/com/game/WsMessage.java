@@ -58,11 +58,11 @@ public class WsMessage extends MessageInbound {
 		case "05": removeRoom(messageString.substring(2));broadcast(usersList,messageString);break;
 		case "06": enterRoom(messageString.substring(2));broadcast(user.getRoom().getrUsersList(),"06"+user.getUserInfo().getuserId());break;
 		case "08": broadcast(user.getRoom().getrUsersList(),sign+user.getUserInfo().getuserId()+":"+messageString.substring(2));break;
-		case "09": case09(messageString.substring(2));break;
+		case "09": privately(messageString.substring(2));break;
 		}
 	}
 	//09私聊
-	private void case09(String message){
+	private void privately(String message){
 		ArrayList<User> wsMessageList=new ArrayList<User>();
 		int  index =message.indexOf("-"); 
 		if(index!=-1){
