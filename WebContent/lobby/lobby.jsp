@@ -83,7 +83,6 @@
 					var roomId="room<%=user.getUserInfo().getuserId() %>";
 					if(roomId!=""){
 						socket.send("04"+roomId);
-						window.location.href="enterRoomServlet?roomId="+roomId;
 					}
 					break;
 				case "09":
@@ -133,7 +132,10 @@
 				span.innerHTML = roomId;
 				a.appendChild(span);
 				document.getElementById("roomPane").appendChild(a);
+				if(roomId=="room<%=user.getUserInfo().getuserId() %>")
+					window.location.href="enterRoomServlet?roomId="+roomId;
 			}
+			
 
 			/* 在大厅删除房间 */
 			function deleteRoom(roomId) {

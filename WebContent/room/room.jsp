@@ -15,7 +15,7 @@
 	if(room==null){
 		response.sendRedirect("../lobby/lobby.jsp");
 		return;
-	}
+	} 
 		ArrayList<User> rUsersList=room.getrUsersList();
 %>
 <html>
