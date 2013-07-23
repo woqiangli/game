@@ -36,5 +36,6 @@
   <filter-mapping>
     <filter-name>filterstation</filter-name>
     <url-pattern>/room/*</url-pattern>
+	<url-pattern>/wsServlet</url-pattern>
   </filter-mapping>
 </web-app>

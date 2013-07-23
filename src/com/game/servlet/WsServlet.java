@@ -26,13 +26,10 @@ public class WsServlet extends WebSocketServlet {
 	protected StreamInbound createWebSocketInbound(String arg0,HttpServletRequest request) {
 		WsMessage wsMessage=null;
 		User user=(User) request.getSession().getAttribute("user");
-		String mode=request.getParameter("mode");
-		if(mode.equals("1")){
-			wsMessage=new WsMessage(user);
-		}
-		else if(mode.equals("2")){
+		if(user.getWsMessage()!=null)
 			wsMessage=user.getWsMessage();
-		}
+		else
+			wsMessage=new WsMessage(user);
 		return wsMessage;
 	}
 }

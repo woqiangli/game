@@ -28,10 +28,10 @@
 				addText("connecting......");
 				/*创建websocket对象  */
 				if('WebSocket' in window){
-					socket=new WebSocket("ws://"+ window.location.host + "/game/wsServlet?mode=2");
+					socket=new WebSocket("ws://"+ window.location.host + "/game/wsServlet");
 				}
 				else if('MozWebSocket' in window){
-					socket=new MozWebSocket("ws://"+ window.location.host + "/game/wsServlet?mode=2");
+					socket=new MozWebSocket("ws://"+ window.location.host + "/game/wsServlet");
 				}
 				socket.onopen=function(){
 					addText("*连接成功,socket初始化成功！");
