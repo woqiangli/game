@@ -15,7 +15,6 @@
   <servlet-mapping>
     <servlet-name>enterRoomServlet</servlet-name>
     <url-pattern>/lobby/enterRoomServlet</url-pattern>
-	
   </servlet-mapping>
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
@@ -32,10 +31,15 @@
   <filter-mapping>
     <filter-name>filterstation</filter-name>
     <url-pattern>/lobby/*</url-pattern>
-  </filter-mapping>
-  <filter-mapping>
-    <filter-name>filterstation</filter-name>
     <url-pattern>/room/*</url-pattern>
-	<url-pattern>/wsServlet</url-pattern>
+    <url-pattern>/wsServlet</url-pattern> 
+  </filter-mapping>
+  <filter>
+    <filter-name>LobbyFilter</filter-name>
+    <filter-class>com.game.servlet.filter.LobbyFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LobbyFilter</filter-name>
+    <url-pattern>/lobby/lobby.jsp</url-pattern>
   </filter-mapping>
 </web-app>
