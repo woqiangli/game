@@ -26,13 +26,15 @@ public class LoginServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		User user = new User();
-		String userId = request.getParameter("userId");
-		user.setUserInfo(new UserInfo());
-		user.getUserInfo().setuserId(userId);
 		HttpSession session  = request.getSession();
-		session.setMaxInactiveInterval(10000);
-		session.setAttribute("user", user);
+		if(session.getAttribute("user")==null){
+			User user = new User();
+			String userId = request.getParameter("userId");
+			user.setUserInfo(new UserInfo());
+			user.getUserInfo().setuserId(userId);
+			session.setMaxInactiveInterval(10000);
+			session.setAttribute("user", user);
+		}
 		response.sendRedirect("lobby/lobby.jsp");
 	}
 
