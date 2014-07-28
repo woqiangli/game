@@ -84,7 +84,6 @@
 						document.getElementById("message").value="";
 					}
 					break;
-				case "10" :socket.send("10");break;
 				}
 			};
 			/*  
@@ -120,7 +119,6 @@
 				<div id="chatPane"></div>
 				<input type="text" id="message" name="message">
 				<button id="sendMessage" onclick="sendMessage('08');" >发送</button>
-				<button id="ready" >准备</button>
 			</div>
 			<div id="rightPane">
 				<ul id="rUsersList">
