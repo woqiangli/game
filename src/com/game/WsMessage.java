@@ -59,6 +59,7 @@ public class WsMessage extends MessageInbound {
 		case "06": enterRoom(messageString.substring(2));break;
 		case "08": broadcast(user.getRoom().getrUsersList(),sign+user.getUserInfo().getuserId()+":"+messageString.substring(2));break;
 		case "09": privately(messageString.substring(2));break;
+		case "10": userReady();break;
 		}
 	}
 	//09私聊
@@ -228,5 +229,19 @@ public class WsMessage extends MessageInbound {
 	/*检测数据是否同步*/
 	private <E> boolean synchro(ArrayList<E> list,E e){
 		return list.contains(e);
+	}
+	/*用户准备时调用*/
+	private void userReady(){
+		this.user.getUserInfo().setUserState(1);
+		ArrayList <User> rUsersList=this.user.getRoom().getrUsersList();
+		int i=0;
+		for(;i<rUsersList.size();i++){
+			if(rUsersList.get(i).getUserInfo().getUserState()!=1)
+				break;
+		}
+		if(i==rUsersList.size()&&i==8){
+			MainThread mainThread=new MainThread(this.user.getRoom());
+			mainThread.start();
+		}
 	}
 }
